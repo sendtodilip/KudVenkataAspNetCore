@@ -1,0 +1,19 @@
+﻿@model HomeDetailsViewModel
+<h1> @Model.PageTitle</h1>
+@{
+
+<div class="card col-md-3" style="width: 18rem;">
+    <img class="card-img-top" src="~/images/background2.jpg" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">Name: @Model.Employee.Name</h5>
+        <p class="card-text">mail: @Model.Employee.Email <br /> Department: @Model.Employee.Department</p>
+       <a asp-controller="home" asp-action="index" class="btn btn-primary">Back</a>
+    </div>
+</div>
+
+}
+
+@section Scripts
+    {
+    <script src="~/js/CustomScript.js"></script>
+}
