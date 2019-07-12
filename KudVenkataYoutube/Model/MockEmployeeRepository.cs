@@ -26,6 +26,17 @@ namespace KudVenkataYoutube.Model
             return employee;
         }
 
+        public Employee DeleteEmployee(int id)
+        {
+            Employee employee = _emplyeeList.Where(x => x.Id == id).FirstOrDefault();
+            if (employee != null)
+            {
+                _emplyeeList.Remove(employee);
+
+            }
+            return employee;
+        }
+
         public Employee GetEmployee(int Id)
         {
             return this._emplyeeList.FirstOrDefault(e => e.Id == Id);
@@ -34,6 +45,18 @@ namespace KudVenkataYoutube.Model
         public IEnumerable<Employee> GetEmployees()
         {
             return _emplyeeList;
+        }
+
+        public Employee UpdateEmployee(Employee newEmployee)
+        {
+            Employee employee = _emplyeeList.Where(x => x.Id == newEmployee.Id).FirstOrDefault();
+            if (employee != null)
+            {
+                employee.Name = newEmployee.Name;
+                employee.Department = newEmployee.Department;
+                employee.Email = newEmployee.Email;
+            }
+            return employee;
         }
     }
 }

@@ -10,5 +10,7 @@ namespace KudVenkataYoutube.Model
         Employee GetEmployee(int Id);
         IEnumerable<Employee> GetEmployees();
         Employee CreateEmployee(Employee employee);
+        Employee UpdateEmployee(Employee newEmployee);
+        Employee DeleteEmployee(int id);
     }
 }
