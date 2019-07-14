@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<Employee>
 
+
 <div class="row">
     @foreach (var item in Model)
     {
+        var photoPath = "~/images/" + (item.PhotoPath ?? "background2.jpg");
         <div class="card col-md-3" style="width: 18rem;">
-            <img class="card-img-top" src="~/images/background12.jpeg" alt="Card image cap" asp-append-version="true">
+            <img class="card-img-top" src="@photoPath" alt="Card image cap" asp-append-version="true">
             <div class="card-body">
                 <h5 class="card-title">@item.Name</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

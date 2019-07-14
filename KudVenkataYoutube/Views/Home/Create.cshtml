@@ -1,5 +1,4 @@
-﻿@model KudVenkataYoutube.Model.Employee
-@inject IEmployeeRepository  _empRepository
+﻿@model EmployeeCreateViewModel
 
 <h1>Create</h1>
 
@@ -7,7 +6,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-controller="home" asp-action="Create" method="post">
+        <form enctype="multipart/form-data" asp-controller="home" asp-action="Create" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -27,11 +26,32 @@
                 <span asp-validation-for="Department" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Photo" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Photo" class="form-control custom-file-input" multiple />
+                    <label class="custom-file-label">Choose File</label>
+                </div>
             </div>
             <div class="form-group">
-                Total Number of Employees: @_empRepository.GetEmployees().Count()
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
+            @section Scripts{
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('.custom-file-input').on("change", function () {
+                            var fileLabel = $('.custom-file-label');
+                            var files = $(this)[0].files;
+                            if (files.length > 1) {
+                                fileLabel.html(files.length + ' files selected')
+                            }
+                            else if (files.length == 1) {
+                                fileLabel.html(files[0].name);
+                            }
+                        })
+                    });
+                </script>
+            }
         </form>
     </div>
 </div>

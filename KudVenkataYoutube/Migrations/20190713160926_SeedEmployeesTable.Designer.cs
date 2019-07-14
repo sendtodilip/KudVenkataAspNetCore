@@ -3,14 +3,16 @@ using KudVenkataYoutube.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KudVenkataYoutube.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190713160926_SeedEmployeesTable")]
+    partial class SeedEmployeesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,8 +35,6 @@ namespace KudVenkataYoutube.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("PhotoPath");
-
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
@@ -46,13 +46,6 @@ namespace KudVenkataYoutube.Migrations
                             Department = 2,
                             Email = "abc@abc.com",
                             Name = "Mark"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Department = 1,
-                            Email = "abc@hr.com",
-                            Name = "John"
                         });
                 });
 #pragma warning restore 612, 618

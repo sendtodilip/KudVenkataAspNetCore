@@ -3,14 +3,16 @@ using KudVenkataYoutube.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KudVenkataYoutube.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190713161601_AlterEmployeeSeedData")]
+    partial class AlterEmployeeSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +34,6 @@ namespace KudVenkataYoutube.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
-
-                    b.Property<string>("PhotoPath");
 
                     b.HasKey("Id");
 
