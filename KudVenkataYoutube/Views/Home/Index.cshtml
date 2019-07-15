@@ -14,7 +14,7 @@
                 @*<a href="@Url.Action("details","home", new { id = item.Id })">View</a>
                     @Html.ActionLink("view", "details", "home", new { id = item.Id })
                     <a href="~/Home/Details/@item.Id" class="btn btn-primary">View</a>*@
-                <a href="#" class="btn btn-primary">Edit</a>
+                <a asp-action="edit" asp-controller="home" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
                 <a href="#" class="btn btn-primary">Delete</a>
             </div>
         </div>

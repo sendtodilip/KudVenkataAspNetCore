@@ -1,0 +1,67 @@
+﻿@model EmployeeEditViewModel
+
+@{ 
+    var photoPath = "~/images/" + (Model.ExistingPhotoPath ?? "background2.jpg");
+}
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-controller="home" asp-action="Edit" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"  />
+            <input type="hidden" asp-for="ExistingPhotoPath" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Department" class="control-label"></label>
+                <select asp-for="Department" asp-items="Html.GetEnumSelectList<Dept>()" class="form-control">
+                    <option value="">Please Select</option>
+                </select>
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Photo" class="form-control custom-file-input" multiple />
+                    <label class="custom-file-label">Click Here to choose photo</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <img asp-append-version="true" src="@photoPath" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+                <a asp-controller="home" asp-action="index" class="btn btn-primary">Cancel</a>
+            </div>
+
+            @section Scripts{
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('.custom-file-input').on("change", function () {
+                            var fileLabel = $('.custom-file-label');
+                            var files = $(this)[0].files;
+                            if (files.length > 1) {
+                                fileLabel.html(files.length + ' files selected')
+                            }
+                            else if (files.length == 1) {
+                                fileLabel.html(files[0].name);
+                            }
+                        })
+                    });
+                </script>
+            }
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

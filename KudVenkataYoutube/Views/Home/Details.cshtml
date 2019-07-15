@@ -10,6 +10,7 @@
         <h5 class="card-title">Name: @Model.Employee.Name</h5>
         <p class="card-text">mail: @Model.Employee.Email <br /> Department: @Model.Employee.Department</p>
         <a asp-controller="home" asp-action="index" class="btn btn-primary">Back</a>
+        <a asp-controller="home" asp-action="edit" asp-route-id="@Model.Employee.Id" class="btn btn-success">Edit</a>
     </div>
 </div>
 
