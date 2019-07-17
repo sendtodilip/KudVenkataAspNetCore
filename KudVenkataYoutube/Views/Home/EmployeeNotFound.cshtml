@@ -1,0 +1,11 @@
+﻿@model int
+<div class="alert alert-danger mt-1 mb-1">
+    <h4>404 Not found Error!!</h4>
+    <hr />
+    <h5>
+        Employee with ID: @Model.ToString()  can not be found
+    </h5>
+    <a asp-controller="home" asp-action="index" class="btn btn-outline-success">
+        Click here to see all the employees.
+    </a>
+</div>

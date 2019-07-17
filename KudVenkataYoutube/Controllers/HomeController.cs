@@ -39,9 +39,17 @@ namespace KudVenkataYoutube.Controllers
         //[Route("[action]/{id?}")]
         public ViewResult Details(int? id)
         {
+            throw new Exception("Error in Details view");
+            Employee employee = _employeeRepository.GetEmployee(id.Value);
+            if (employee==null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id.Value);
+            }
+           
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(id ?? 1),
+                Employee = employee,    
                 PageTitle = "Employee Details"
             };
             return View(homeDetailsViewModel);
@@ -78,7 +86,7 @@ namespace KudVenkataYoutube.Controllers
                 employee.Department = model.Department;
                 if (model.Photo != null)
                 {
-                    if (model.ExistingPhotoPath != null)
+                    if (model.ExistingPhotoPath != null)  
                     {
                         string filePath = Path.Combine(hostingEnvironment.WebRootPath, "images", model.ExistingPhotoPath);
                         System.IO.File.Delete(filePath);

@@ -45,6 +45,13 @@ namespace KudVenkataYoutube
                 };
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                //app.UseStatusCodePages();
+                //app.UseStatusCodePagesWithRedirects("/Error/{0}");
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
 
             //DefaultFilesOptions defaultFiles = new DefaultFilesOptions();
             //defaultFiles.DefaultFileNames.Clear();
@@ -71,11 +78,11 @@ namespace KudVenkataYoutube
             //    await next.Invoke();
             //});
 
-            app.Run(async (context) =>
-            {
-                //throw new Exception("Exception from asp.net core application.");
-                await context.Response.WriteAsync("Hello MVC");
-            });
+            //app.Run(async (context) =>
+            //{
+            //    //throw new Exception("Exception from asp.net core application.");
+            //    await context.Response.WriteAsync("Hello MVC");
+            //});
         }
     }
 }
