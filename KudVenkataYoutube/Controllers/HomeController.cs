@@ -8,6 +8,7 @@ using KudVenkataYoutube.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace KudVenkataYoutube.Controllers
 {
@@ -16,11 +17,13 @@ namespace KudVenkataYoutube.Controllers
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly ILogger<HomeController> logger;
 
-        public HomeController(IEmployeeRepository employeRepository, IHostingEnvironment hostingEnvironment)
+        public HomeController(IEmployeeRepository employeRepository, IHostingEnvironment hostingEnvironment, ILogger<HomeController> logger )
         {
             _employeeRepository = employeRepository;
             this.hostingEnvironment = hostingEnvironment;
+            this.logger = logger;
         }
         //[Route("")]
         //[Route("[action]")]
@@ -39,7 +42,15 @@ namespace KudVenkataYoutube.Controllers
         //[Route("[action]/{id?}")]
         public ViewResult Details(int? id)
         {
-            throw new Exception("Error in Details view");
+            //throw new Exception("Error in Details view");
+
+            logger.LogTrace("Trace Log");
+            logger.LogDebug("Debug Log");
+            logger.LogInformation("Information Log.");
+            logger.LogWarning("warning Log");
+            logger.LogError("Error log");
+            logger.LogCritical("critical log");
+
             Employee employee = _employeeRepository.GetEmployee(id.Value);
             if (employee==null)
             {
