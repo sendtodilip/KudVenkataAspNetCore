@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KudVenkataYoutube.Model;
 using KudVenkataYoutube.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Logging;
 namespace KudVenkataYoutube.Controllers
 {
     //[Route("[Controller]")]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
@@ -28,6 +30,7 @@ namespace KudVenkataYoutube.Controllers
         //[Route("")]
         //[Route("[action]")]
         //[Route("~/")]
+        [AllowAnonymous]
         public ViewResult Index()
         {
             var model = _employeeRepository.GetEmployees();
@@ -40,6 +43,7 @@ namespace KudVenkataYoutube.Controllers
             return new ObjectResult(employee);
         }
         //[Route("[action]/{id?}")]
+        [AllowAnonymous]
         public ViewResult Details(int? id)
         {
             //throw new Exception("Error in Details view");
@@ -66,12 +70,14 @@ namespace KudVenkataYoutube.Controllers
             return View(homeDetailsViewModel);
         }
         [HttpGet]
+        [Authorize]
         public ViewResult Create()
         {
             return View();
         }
 
         [HttpGet]
+        [Authorize]
         public ViewResult Edit(int id)
         {
             Employee employee = _employeeRepository.GetEmployee(id);
@@ -87,6 +93,7 @@ namespace KudVenkataYoutube.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(EmployeeEditViewModel model)
         {
             if (ModelState.IsValid)
@@ -131,6 +138,7 @@ namespace KudVenkataYoutube.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(EmployeeCreateViewModel model)
         {
             if (ModelState.IsValid)
