@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KudVenkataYoutube.Utilities;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,6 +12,8 @@ namespace KudVenkataYoutube.ViewModels
     {
         [Required]
         [EmailAddress]
+        [Remote(action:"IsEmailInUse", controller:"Account")]
+        [ValidEmailDomain(allowedDomain:"gmail.com", ErrorMessage ="Email domain must be gmail.com")]
         public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]
