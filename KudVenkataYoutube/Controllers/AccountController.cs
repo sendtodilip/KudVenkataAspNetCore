@@ -65,6 +65,10 @@ namespace KudVenkataYoutube.Controllers
 
                 if (result.Succeeded)
                 {
+                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Administration");
+                    }
                     await signInManager.SignInAsync(user, false);
                     return RedirectToAction("index", "home");
                 }
@@ -104,6 +108,13 @@ namespace KudVenkataYoutube.Controllers
                 }
                 ModelState.AddModelError("", "Invalid Login Attemp.");
             }
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
             return View();
         }
     }
